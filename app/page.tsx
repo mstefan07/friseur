@@ -5,6 +5,7 @@ import { Footer } from "@/components/Footer";
 import { Gallery } from "@/components/Gallery";
 import { Hero } from "@/components/Hero";
 import { Navbar } from "@/components/Navbar";
+import { OwnerSection } from "@/components/OwnerSection";
 import { PriceList } from "@/components/PriceList";
 import { Services } from "@/components/Services";
 
@@ -14,6 +15,7 @@ export default function Home() {
       <Navbar />
       <main>
         <Hero />
+        <OwnerSection />
         <Services />
         <PriceList />
         <BeforeAfterGallery />

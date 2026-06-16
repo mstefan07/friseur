@@ -196,6 +196,7 @@ export const openingHours = [
 ];
 
 export const navigation = [
+  { href: "#inhaber", label: "Inhaber" },
   { href: "#salon", label: "Salon" },
   { href: "#leistungen", label: "Leistungen" },
   { href: "#transformationen", label: "Vorher/Nachher" },
