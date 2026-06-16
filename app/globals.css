@@ -1,0 +1,50 @@
+@import "tailwindcss";
+
+:root {
+  --background: #090907;
+  --foreground: #f7f1e7;
+  --bronze: #b9884a;
+  --bronze-soft: #d3ae73;
+  --cream: #f3ead9;
+  --anthracite: #181816;
+  --muted: #b9ad9d;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-inter), Arial, Helvetica, sans-serif;
+}
+
+::selection {
+  background: rgba(185, 136, 74, 0.35);
+}
+
+.font-display {
+  font-family: var(--font-cormorant), Georgia, serif;
+}
+
+.luxury-border {
+  border-color: rgba(211, 174, 115, 0.28);
+}
+
+.barber-gradient {
+  background:
+    radial-gradient(circle at 80% 12%, rgba(185, 136, 74, 0.2), transparent 32rem),
+    linear-gradient(135deg, #080807 0%, #171716 52%, #0b0b0a 100%);
+}
+
+.cream-section {
+  background:
+    radial-gradient(circle at 8% 18%, rgba(185, 136, 74, 0.13), transparent 24rem),
+    #f3ead9;
+  color: #171511;
+}
+
+.shadow-bronze {
+  box-shadow: 0 22px 80px rgba(185, 136, 74, 0.16);
+}
