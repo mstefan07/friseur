@@ -19,7 +19,7 @@ const initialForm: BookingFormState = {
 };
 
 const fieldClass =
-  "w-full border border-[#d3ae73]/25 bg-[#0f0e0c] px-4 py-3 text-[#f7f1e7] outline-none transition focus:border-[#d3ae73] focus:bg-[#151411]";
+  "box-border block w-full max-w-full min-w-0 border border-[#d3ae73]/25 bg-[#0f0e0c] px-3 py-3 text-[#f7f1e7] outline-none transition focus:border-[#d3ae73] focus:bg-[#151411] sm:px-4";
 
 function clientValidate(form: BookingFormState) {
   if (!form.date.trim() || !form.time.trim()) {
@@ -111,8 +111,8 @@ export function BookingForm() {
   }
 
   return (
-    <SectionReveal id="buchung" className="barber-gradient py-16 sm:py-20">
-      <div className="mx-auto max-w-lg px-5 sm:px-8">
+    <SectionReveal id="buchung" className="barber-gradient overflow-x-hidden py-16 sm:py-20">
+      <div className="mx-auto box-border w-full max-w-lg min-w-0 px-5 sm:px-8">
         <div className="text-center">
           <h2 className="font-display text-3xl leading-tight text-[#f7f1e7] sm:text-4xl">
             Termin buchen
@@ -128,10 +128,10 @@ export function BookingForm() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-70px" }}
           transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-          className="mt-8 border border-[#d3ae73]/28 bg-[#12110f]/92 p-5 shadow-[0_20px_60px_rgba(0,0,0,0.35)] sm:p-6"
+          className="mt-8 box-border w-full max-w-full min-w-0 overflow-hidden border border-[#d3ae73]/28 bg-[#12110f]/92 p-5 shadow-[0_20px_60px_rgba(0,0,0,0.35)] sm:p-6"
           noValidate
         >
-          <div className="grid gap-4 sm:grid-cols-2">
+          <div className="grid min-w-0 grid-cols-1 gap-4 md:grid-cols-2">
             <Field label="Datum">
               <input
                 className={`${fieldClass} cursor-pointer [color-scheme:dark]`}
@@ -146,7 +146,7 @@ export function BookingForm() {
             </Field>
 
             <Field label="Uhrzeit">
-              <div className="relative">
+              <div className="relative box-border w-full min-w-0 max-w-full">
                 <select
                   className={`${fieldClass} cursor-pointer appearance-none pr-10 [color-scheme:dark]`}
                   value={form.time}
@@ -189,13 +189,13 @@ export function BookingForm() {
             ) : null}
           </AnimatePresence>
 
-          <div className="mt-5">
+          <div className="mt-5 w-full min-w-0 max-w-full">
             <motion.button
               whileHover={{ y: -2 }}
               whileTap={{ scale: 0.98 }}
               type="submit"
               disabled={status === "loading"}
-              className="inline-flex w-full items-center justify-center gap-2 bg-[#d3ae73] px-5 py-3.5 text-sm font-semibold text-[#12110f] transition hover:bg-[#f0d49e] disabled:cursor-not-allowed disabled:opacity-70"
+              className="box-border inline-flex w-full max-w-full min-w-0 items-center justify-center gap-2 bg-[#d3ae73] px-5 py-3.5 text-sm font-semibold text-[#12110f] transition hover:bg-[#f0d49e] disabled:cursor-not-allowed disabled:opacity-70"
             >
               {status === "loading" ? (
                 "Wird gesendet..."
@@ -235,7 +235,7 @@ function Field({
   children: React.ReactNode;
 }) {
   return (
-    <label className="block">
+    <label className="block w-full min-w-0 max-w-full box-border">
       <span className="mb-1.5 block text-sm font-medium text-[#d3ae73]">{label}</span>
       {children}
     </label>
