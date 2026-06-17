@@ -10,7 +10,8 @@ dezente UI-Animationen umgesetzt.
 - Barber-only Leistungen und Preisliste
 - Interaktive Vorher-/Nachher-Slider für Fade, Bart und Styling
 - Google Calendar Terminbuchung per Embed
-- Kontaktbereich, Google-Maps-Platzhalter, Impressum und Datenschutz
+- Kontaktbereich mit Route-Link (kein automatisches Google-Maps-Embed)
+- Impressum und Datenschutz als Platzhalter (`noindex`) bis zum Livegang
 - Technische SEO: Metadata, Sitemap, robots.txt, JSON-LD, llms.txt
 
 ## Installation
@@ -67,8 +68,8 @@ Vor dem Livegang ersetzen:
 - NAP, Geo-Koordinaten und Social Links in `lib/site.ts`
 - Leistungen, Preise, Dauer und Mitarbeiter in `lib/data.ts`
 - Bilder in `public/images/`
-- Rechtstexte in `app/impressum/page.tsx` und `app/datenschutz/page.tsx`
-- Google Maps Embed im Kontaktbereich, falls eine genaue Adresse vorhanden ist
+- Rechtstexte in `app/impressum/page.tsx` und `app/datenschutz/page.tsx` (danach `noindex` entfernen und Seiten in `app/sitemap.ts` aufnehmen)
+- Route-Link im Kontaktbereich mit echter Adresse in `lib/site.ts`
 - Favicon / App Icons (aktuell noch TODO)
 
 ## Google Calendar
@@ -80,6 +81,6 @@ NEXT_PUBLIC_SITE_URL=
 NEXT_PUBLIC_GOOGLE_CALENDAR_SCHEDULING_URL=
 ```
 
-Die Buchung läuft primär über das Google-Calendar-Embed auf der Startseite.
+Die Buchung läuft ausschließlich über das Google-Calendar-Embed auf der Startseite. Es gibt keine eigene Booking-API mehr.
 
 Wichtig: Keine echten Keys in Git committen.

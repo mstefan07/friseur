@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
+import { ExternalLink } from "lucide-react";
 import { salon } from "@/lib/data";
 import { SectionReveal } from "@/components/SectionReveal";
 
@@ -18,8 +19,8 @@ export function BookingForm() {
             Termin buchen
           </h2>
           <p className="mt-3 text-sm leading-7 text-[#5b5147] sm:text-base">
-            Wähle einen freien Termin. Bereits gebuchte Zeiten werden automatisch
-            ausgeblendet.
+            Wähle einen freien Termin im Google-Kalender. Verfügbarkeiten und
+            Bestätigung werden direkt dort verwaltet.
           </p>
         </div>
 
@@ -38,6 +39,18 @@ export function BookingForm() {
             referrerPolicy="no-referrer-when-downgrade"
           />
         </motion.div>
+
+        <div className="mx-auto mt-5 flex max-w-3xl justify-center">
+          <a
+            href={schedulingUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-2 border border-[#171511]/18 bg-white/70 px-5 py-3 text-sm font-semibold text-[#171511] transition hover:border-[#8a6234] hover:text-[#8a6234]"
+          >
+            <ExternalLink className="size-4" aria-hidden="true" />
+            Termin im Buchungskalender öffnen
+          </a>
+        </div>
       </div>
     </SectionReveal>
   );

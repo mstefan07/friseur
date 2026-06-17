@@ -12,8 +12,8 @@ export const metadata: Metadata = {
     canonical: "/datenschutz",
   },
   robots: {
-    index: true,
-    follow: true,
+    index: false,
+    follow: false,
   },
 };
 
@@ -45,17 +45,23 @@ export default function DatenschutzPage() {
             <div>
               <h2 className="font-semibold text-[#f7f1e7]">Terminbuchung</h2>
               <p className="mt-3 leading-7">
-                Das Formular verarbeitet Name, Telefonnummer, E-Mail, gewünschte
-                Leistung, Wunsch-Barber, Datum, Uhrzeit und optionale Nachricht.
-                Die Daten werden aktuell nur an die API-Route der Website gesendet
-                und dort als Kalenderentwurf vorbereitet.
+                Die Online-Terminbuchung erfolgt über Google Calendar Appointment
+                Scheduling. Beim Öffnen des Buchungsbereichs oder beim Klick auf
+                den externen Buchungslink werden Inhalte von Google geladen. Dabei
+                können personenbezogene Daten wie Name, E-Mail-Adresse und
+                Terminwahl direkt an Google übermittelt werden. Es wird kein
+                eigenes Buchungsformular auf dieser Website verarbeitet.
               </p>
             </div>
             <div>
               <h2 className="font-semibold text-[#f7f1e7]">Externe Dienste</h2>
               <p className="mt-3 leading-7">
-                Google Maps und eine spätere Google-Calendar-Integration müssen
-                in der finalen Datenschutzerklärung korrekt beschrieben werden.
+                Google Calendar Appointment Scheduling wird für die Terminbuchung
+                eingebunden. Google Maps wird nicht automatisch geladen, sondern
+                erst nach Klick auf den Route-Button im Kontaktbereich geöffnet.
+                Beide Dienste müssen in der finalen Datenschutzerklärung mit
+                Anbieter, Zweck, Rechtsgrundlage und Speicherdauer beschrieben
+                werden.
               </p>
             </div>
           </div>

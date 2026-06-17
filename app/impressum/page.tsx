@@ -12,8 +12,8 @@ export const metadata: Metadata = {
     canonical: "/impressum",
   },
   robots: {
-    index: true,
-    follow: true,
+    index: false,
+    follow: false,
   },
 };
 
@@ -32,11 +32,11 @@ export default function ImpressumPage() {
 
           <div className="mt-10 grid gap-6 text-[#e7dccb]">
             <div>
-              <h2 className="font-semibold text-[#f7f1e7]">Angaben gemäß § 5 TMG</h2>
+              <h2 className="font-semibold text-[#f7f1e7]">Angaben gemäß § 5 DDG</h2>
               <p className="mt-3 leading-7">
                 {salon.name}
                 <br />
-                Musterinhaber: Max Mustermann
+                Inhaber: [Vor Livegang ergänzen]
                 <br />
                 {salon.address}
               </p>

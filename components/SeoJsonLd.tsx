@@ -1,23 +1,25 @@
 import {
   address,
   businessName,
+  city,
   email,
   geo,
   getSiteUrl,
+  isPlaceholderNap,
+  isPlaceholderSocial,
   ogImage,
   openingHoursSpecification,
   phone,
   priceRange,
+  region,
   schemaServices,
   siteDescription,
   siteName,
   socialLinks,
-  city,
-  region,
 } from "@/lib/site";
 
 function buildHairSalonSchema(siteUrl: string) {
-  return {
+  const schema: Record<string, unknown> = {
     "@context": "https://schema.org",
     "@type": "HairSalon",
     "@id": `${siteUrl}/#hairsalon`,
@@ -25,22 +27,7 @@ function buildHairSalonSchema(siteUrl: string) {
     url: siteUrl,
     image: `${siteUrl}${ogImage.path}`,
     description: siteDescription,
-    telephone: phone,
-    email,
     priceRange,
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: address.streetAddress,
-      postalCode: address.postalCode,
-      addressLocality: address.addressLocality,
-      addressRegion: address.addressRegion,
-      addressCountry: address.addressCountry,
-    },
-    geo: {
-      "@type": "GeoCoordinates",
-      latitude: geo.latitude,
-      longitude: geo.longitude,
-    },
     openingHoursSpecification: openingHoursSpecification.map((entry) => ({
       "@type": "OpeningHoursSpecification",
       ...entry,
@@ -53,7 +40,6 @@ function buildHairSalonSchema(siteUrl: string) {
         name: region,
       },
     },
-    sameAs: socialLinks.map((link) => link.href),
     hasOfferCatalog: {
       "@type": "OfferCatalog",
       name: "Barber-Leistungen",
@@ -70,10 +56,36 @@ function buildHairSalonSchema(siteUrl: string) {
       })),
     },
   };
+
+  if (!isPlaceholderNap) {
+    Object.assign(schema, {
+      telephone: phone,
+      email,
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: address.streetAddress,
+        postalCode: address.postalCode,
+        addressLocality: address.addressLocality,
+        addressRegion: address.addressRegion,
+        addressCountry: address.addressCountry,
+      },
+      geo: {
+        "@type": "GeoCoordinates",
+        latitude: geo.latitude,
+        longitude: geo.longitude,
+      },
+    });
+  }
+
+  if (!isPlaceholderSocial) {
+    schema.sameAs = socialLinks.map((link) => link.href);
+  }
+
+  return schema;
 }
 
 function buildOrganizationSchema(siteUrl: string) {
-  return {
+  const schema: Record<string, unknown> = {
     "@context": "https://schema.org",
     "@type": "Organization",
     "@id": `${siteUrl}/#organization`,
@@ -81,10 +93,17 @@ function buildOrganizationSchema(siteUrl: string) {
     url: siteUrl,
     logo: `${siteUrl}/images/barber-logo.webp`,
     image: `${siteUrl}${ogImage.path}`,
-    email,
-    telephone: phone,
-    sameAs: socialLinks.map((link) => link.href),
   };
+
+  if (!isPlaceholderNap) {
+    Object.assign(schema, { email, telephone: phone });
+  }
+
+  if (!isPlaceholderSocial) {
+    schema.sameAs = socialLinks.map((link) => link.href);
+  }
+
+  return schema;
 }
 
 function buildWebSiteSchema(siteUrl: string) {

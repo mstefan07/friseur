@@ -7,6 +7,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { openingHours, salon } from "@/lib/data";
+import { isPlaceholderNap } from "@/lib/site";
 import { SectionReveal } from "@/components/SectionReveal";
 
 export function ContactSection() {
@@ -20,10 +21,12 @@ export function ContactSection() {
           <h2 className="font-display text-4xl leading-tight text-[#171511] sm:text-6xl">
             Herrenfriseur in Langen. Klar erreichbar, online buchbar.
           </h2>
-          <p className="mt-6 text-lg leading-8 text-[#5b5147]">
-            Die folgenden Angaben sind Platzhalter und muessen vor dem Launch mit
-            echten Saloninformationen ersetzt werden.
-          </p>
+          {isPlaceholderNap ? (
+            <p className="mt-6 text-lg leading-8 text-[#5b5147]">
+              Die Kontaktangaben sind noch Platzhalter und werden vor dem Livegang
+              mit echten Saloninformationen ersetzt.
+            </p>
+          ) : null}
 
           <div className="mt-9 grid gap-4">
             <ContactRow icon={MapPin} label="Adresse" value={salon.address} />
@@ -59,14 +62,28 @@ export function ContactSection() {
         </div>
 
         <div className="grid gap-6">
-          <div className="overflow-hidden border border-[#171511]/12 bg-[#171511] shadow-[0_18px_48px_rgba(23,21,17,0.12)]">
-            <iframe
-              title="Google Maps Platzhalter für Yunes Barber in Langen"
-              src="https://www.google.com/maps?q=Langen%20Hessen&output=embed"
-              className="h-[360px] w-full border-0"
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            />
+          <div className="border border-[#171511]/12 bg-white/58 p-6 shadow-[0_18px_48px_rgba(23,21,17,0.08)]">
+            <div className="mb-5 flex items-start gap-4">
+              <span className="flex size-11 shrink-0 items-center justify-center bg-[#171511] text-[#d3ae73]">
+                <MapPin className="size-5" aria-hidden="true" />
+              </span>
+              <div>
+                <h3 className="text-xl font-semibold text-[#171511]">Standort</h3>
+                <p className="mt-2 text-sm leading-7 text-[#5b5147]">{salon.address}</p>
+              </div>
+            </div>
+            <a
+              href={salon.mapsUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 bg-[#171511] px-5 py-3 text-sm font-semibold text-[#f3ead9] transition hover:bg-[#8a6234]"
+            >
+              <Route className="size-4" aria-hidden="true" />
+              Route in Google Maps öffnen
+            </a>
+            <p className="mt-4 text-xs leading-6 text-[#6d6257]">
+              Google Maps wird erst geöffnet, wenn du den Button anklickst.
+            </p>
           </div>
 
           <div className="border border-[#171511]/12 bg-white/58 p-6 shadow-[0_18px_48px_rgba(23,21,17,0.08)]">

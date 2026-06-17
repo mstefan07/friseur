@@ -157,39 +157,6 @@ export const beforeAfterItems = [
   },
 ];
 
-export const galleryImages = [
-  {
-    src: "/images/hero-barber.png",
-    title: "Premium Schnitt",
-    category: "Herrenhaarschnitt",
-  },
-  {
-    src: "/images/gallery-fade.png",
-    title: "Clean Fade",
-    category: "Fade",
-  },
-  {
-    src: "/images/gallery-razor.png",
-    title: "Razor Finish",
-    category: "Rasur",
-  },
-  {
-    src: "/images/gallery-station.png",
-    title: "Barber Station",
-    category: "Salon",
-  },
-  {
-    src: "/images/after-2.png",
-    title: "Bart Shape",
-    category: "Bartpflege",
-  },
-  {
-    src: "/images/after-3.png",
-    title: "Styling Finish",
-    category: "Styling",
-  },
-];
-
 export const openingHours = openingHoursDisplay;
 
 export const navigation = [

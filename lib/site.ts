@@ -25,6 +25,10 @@ export const email = "termin@yunes-barber.de";
 export const streetAddress = "Platzhalterstraße 12";
 export const postalCode = "63225";
 
+// Set to false once real NAP data is configured in this file.
+export const isPlaceholderNap =
+  streetAddress.toLowerCase().includes("platzhalter") || phone.includes("000000");
+
 export const address = {
   streetAddress,
   postalCode,
@@ -87,6 +91,11 @@ export const socialLinks = [
     platform: "tiktok" as const,
   },
 ];
+
+export const isPlaceholderSocial = socialLinks.every(
+  (link) =>
+    link.href === "https://www.instagram.com/" || link.href === "https://www.tiktok.com/",
+);
 
 export const schemaServices = [
   "Herrenhaarschnitt",
