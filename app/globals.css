@@ -54,23 +54,65 @@ body {
   background: #ffffff;
 }
 
-@keyframes barber-pole-rotate {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.barber-pole-icon {
+  justify-content: center;
 }
 
-.barber-pole-spin {
-  transform-box: fill-box;
-  transform-origin: center;
-  animation: barber-pole-rotate 6s linear infinite;
+.barber-pole-cap {
+  width: 88%;
+  height: 10%;
+  min-height: 3px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: linear-gradient(180deg, #ece2cf 0%, #c9a56a 48%, #8a6234 100%);
+}
+
+.barber-pole-cylinder {
+  position: relative;
+  width: 68%;
+  flex: 1;
+  min-height: 14px;
+  overflow: hidden;
+  border-radius: 999px;
+}
+
+.barber-pole-stripes {
+  position: absolute;
+  inset: -50%;
+  background: repeating-linear-gradient(
+    -45deg,
+    #c73e3a 0px 5px,
+    #f7f1e7 5px 10px,
+    #2a4f82 10px 15px
+  );
+  background-size: 15px 15px;
+  animation: barberPoleStripes 2.4s linear infinite;
+}
+
+.barber-pole-sheen {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.3) 0%,
+    rgba(255, 255, 255, 0) 42%,
+    rgba(0, 0, 0, 0.14) 100%
+  );
+  pointer-events: none;
+}
+
+@keyframes barberPoleStripes {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 15px 15px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .barber-pole-spin {
+  .barber-pole-stripes {
     animation: none;
   }
 }
