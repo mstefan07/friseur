@@ -6,7 +6,6 @@ import Link from "next/link";
 import { AnimatePresence, motion } from "motion/react";
 import { CalendarDays, Menu, X } from "lucide-react";
 import { navigation, salon, socialLinks } from "@/lib/data";
-import { BarberPoleIcon } from "@/components/BarberPoleIcon";
 import { SocialLinks } from "@/components/SocialLinks";
 
 export function Navbar() {
@@ -22,10 +21,9 @@ export function Navbar() {
               window.scrollTo({ top: 0, behavior: "smooth" });
             }
           }}
-          className="group flex items-center gap-2.5 sm:gap-3"
+          className="group flex items-center gap-3"
           aria-label="Zur Startseite"
         >
-          <BarberPoleIcon className="h-[36px] w-[18px] sm:h-[42px] sm:w-[21px]" />
           <Image
             src="/images/barber-logo.webp"
             alt={`${salon.name} Logo`}
