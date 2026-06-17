@@ -1,54 +1,29 @@
-import { barberServices } from "@/lib/data";
-
 export type BookingPayload = {
-  name: string;
-  phone: string;
-  email: string;
-  service: string;
-  barber: string;
   date: string;
   time: string;
-  message?: string;
 };
 
 export type BookingValidationResult =
   | { ok: true; data: BookingPayload; durationMinutes: number }
   | { ok: false; errors: Record<string, string> };
 
-const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const timePattern = /^([01]\d|2[0-3]):[0-5]\d$/;
+const DEFAULT_DURATION_MINUTES = 45;
 
 export function validateBookingPayload(input: unknown): BookingValidationResult {
   const errors: Record<string, string> = {};
   const data = (input ?? {}) as Partial<BookingPayload>;
 
-  const requiredFields: Array<keyof BookingPayload> = [
-    "name",
-    "phone",
-    "email",
-    "service",
-    "barber",
-    "date",
-    "time",
-  ];
-
-  for (const field of requiredFields) {
-    if (!String(data[field] ?? "").trim()) {
-      errors[field] = "Dieses Feld ist erforderlich.";
-    }
+  if (!String(data.date ?? "").trim()) {
+    errors.date = "Dieses Feld ist erforderlich.";
   }
 
-  if (data.email && !emailPattern.test(data.email)) {
-    errors.email = "Bitte eine gültige E-Mail-Adresse eingeben.";
+  if (!String(data.time ?? "").trim()) {
+    errors.time = "Dieses Feld ist erforderlich.";
   }
 
   if (data.time && !timePattern.test(data.time)) {
     errors.time = "Bitte eine gültige Uhrzeit im Format HH:MM wählen.";
-  }
-
-  const service = barberServices.find((item) => item.id === data.service);
-  if (data.service && !service) {
-    errors.service = "Diese Leistung ist nicht verfuegbar.";
   }
 
   if (data.date) {
@@ -58,42 +33,30 @@ export function validateBookingPayload(input: unknown): BookingValidationResult 
     }
   }
 
-  if (Object.keys(errors).length > 0 || !service) {
+  if (Object.keys(errors).length > 0) {
     return { ok: false, errors };
   }
 
   return {
     ok: true,
-    durationMinutes: service.durationMinutes || 60,
+    durationMinutes: DEFAULT_DURATION_MINUTES,
     data: {
-      name: String(data.name).trim(),
-      phone: String(data.phone).trim(),
-      email: String(data.email).trim(),
-      service: service.id,
-      barber: String(data.barber).trim(),
       date: String(data.date).trim(),
       time: String(data.time).trim(),
-      message: String(data.message ?? "").trim(),
     },
   };
 }
 
-export function createCalendarDraft(payload: BookingPayload, durationMinutes: number) {
-  const service = barberServices.find((item) => item.id === payload.service);
+export function createCalendarDraft(
+  payload: BookingPayload,
+  durationMinutes = DEFAULT_DURATION_MINUTES,
+) {
   const start = toCalendarDate(payload.date, payload.time);
   const end = new Date(start.getTime() + durationMinutes * 60 * 1000);
 
   return {
-    summary: `Friseurtermin – ${payload.name}`,
-    description: [
-      `Leistung: ${service?.name ?? payload.service}`,
-      `Telefon: ${payload.phone}`,
-      `E-Mail: ${payload.email}`,
-      `Wunsch-Barber: ${payload.barber}`,
-      payload.message ? `Nachricht: ${payload.message}` : null,
-    ]
-      .filter(Boolean)
-      .join("\n"),
+    summary: "Terminanfrage",
+    description: `Gewünschter Termin: ${payload.date} um ${payload.time}`,
     start: {
       dateTime: formatCalendarDateTime(start),
       timeZone: "Europe/Berlin",

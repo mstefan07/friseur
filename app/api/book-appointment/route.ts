@@ -25,12 +25,10 @@ export async function POST(request: Request) {
 
     return NextResponse.json({
       ok: true,
-      message:
-        "Deine Anfrage ist eingegangen. Der Termin wurde als Kalenderentwurf vorbereitet.",
+      message: "Danke! Deine Terminanfrage wurde gesendet.",
       booking: {
-        name: validation.data.name,
-        service: validation.data.service,
-        barber: validation.data.barber,
+        date: validation.data.date,
+        time: validation.data.time,
         start: calendarDraft.start,
         end: calendarDraft.end,
       },
