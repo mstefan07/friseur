@@ -8,6 +8,13 @@ export const metadata: Metadata = {
   title: "Impressum",
   description:
     "Impressum-Platzhalter für Yunes Barber in Langen. Muss vor Veröffentlichung rechtlich geprüft und ersetzt werden.",
+  alternates: {
+    canonical: "/impressum",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function ImpressumPage() {

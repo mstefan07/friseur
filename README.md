@@ -6,14 +6,12 @@ dezente UI-Animationen umgesetzt.
 
 ## Funktionen
 
-- Premium-Barber-Startseite mit Hero, Trust-Elementen und klaren CTAs
+- Premium-Barber-Startseite mit Hero und klaren CTAs
 - Barber-only Leistungen und Preisliste
 - Interaktive Vorher-/Nachher-Slider für Fade, Bart und Styling
-- Galerie mit Lightbox
-- Online-Terminbuchung über `/api/book-appointment`
-- Google-Calendar-Struktur vorbereitet, aber ohne echte Credentials
+- Google Calendar Terminbuchung per Embed
 - Kontaktbereich, Google-Maps-Platzhalter, Impressum und Datenschutz
-- SEO-Basics, Open Graph und responsive Layouts
+- Technische SEO: Metadata, Sitemap, robots.txt, JSON-LD, llms.txt
 
 ## Installation
 
@@ -44,30 +42,44 @@ npm run build
 Das Projekt ist Vercel-ready. Repository mit Vercel verbinden, Build Command
 `npm run build` verwenden und danach die Environment Variables setzen.
 
+## SEO / Domain
+
+Setze nach Domain-Kauf die echte Produktions-URL in Vercel:
+
+```bash
+NEXT_PUBLIC_SITE_URL=https://www.deine-domain.de
+```
+
+Danach prüfen:
+
+- `/sitemap.xml`
+- `/robots.txt`
+- `/llms.txt`
+
+Google Search Console einrichten und die Sitemap einreichen.
+
+Zentrale SEO-Konfiguration: `lib/site.ts`
+
 ## Platzhalter ersetzen
 
 Vor dem Livegang ersetzen:
 
-- Salonname, Adresse, Telefonnummer, E-Mail und Social Links in `lib/data.ts`
+- NAP, Geo-Koordinaten und Social Links in `lib/site.ts`
 - Leistungen, Preise, Dauer und Mitarbeiter in `lib/data.ts`
 - Bilder in `public/images/`
 - Rechtstexte in `app/impressum/page.tsx` und `app/datenschutz/page.tsx`
 - Google Maps Embed im Kontaktbereich, falls eine genaue Adresse vorhanden ist
-- Open-Graph-URL in `app/layout.tsx`
+- Favicon / App Icons (aktuell noch TODO)
 
-## Google Calendar vorbereiten
+## Google Calendar
 
-Kopiere `.env.example` nach `.env.local` und setze später echte Werte:
+Kopiere `.env.example` nach `.env.local` und setze bei Bedarf:
 
 ```bash
-GOOGLE_CLIENT_EMAIL=
-GOOGLE_PRIVATE_KEY=
-GOOGLE_CALENDAR_ID=
+NEXT_PUBLIC_SITE_URL=
+NEXT_PUBLIC_GOOGLE_CALENDAR_SCHEDULING_URL=
 ```
 
-Die API-Route `/api/book-appointment` validiert Buchungsdaten und erzeugt einen
-Kalenderentwurf mit Titel, Beschreibung, Startzeit und Endzeit. Die echte
-Google-Calendar-Integration ist in `lib/booking.ts` als TODO markiert.
+Die Buchung läuft primär über das Google-Calendar-Embed auf der Startseite.
 
-Wichtig: Keine echten Keys in Git committen. Der Kalender muss für ein
-Service-Account-Setup mit `GOOGLE_CLIENT_EMAIL` geteilt werden.
+Wichtig: Keine echten Keys in Git committen.

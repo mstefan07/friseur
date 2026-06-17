@@ -1,4 +1,13 @@
 // TODO: Replace all placeholder contact, team, service and image data with real Yunes Barber details before launch.
+import {
+  address,
+  businessName,
+  city,
+  email,
+  openingHoursDisplay,
+  phone,
+  socialLinks,
+} from "@/lib/site";
 export type BarberService = {
   id: string;
   category: "Cut" | "Beard" | "Package" | "Finish";
@@ -16,12 +25,12 @@ export type Barber = {
 };
 
 export const salon = {
-  name: "Yunes Barber",
-  city: "Langen",
+  name: businessName,
+  city,
   claim: "Premium Barber Experience in Langen",
-  phone: "+49 6103 000000",
-  email: "termin@yunes-barber.de",
-  address: "Platzhalterstraße 12, 63225 Langen",
+  phone,
+  email,
+  address: address.full,
   mapsUrl: "https://www.google.com/maps/search/?api=1&query=Langen",
   googleCalendarSchedulingUrl:
     "https://calendar.google.com/calendar/appointments/schedules/AcZssZ1thEBHs9A3FH2l9DMWVBjaem45Viie2xHCbddoiAJRvTbJKIRfgPf7nJjXF76n4nsZ_65jJHbb?gv=true",
@@ -181,15 +190,7 @@ export const galleryImages = [
   },
 ];
 
-export const openingHours = [
-  { day: "Montag", hours: "geschlossen" },
-  { day: "Dienstag", hours: "10:00-19:00" },
-  { day: "Mittwoch", hours: "10:00-19:00" },
-  { day: "Donnerstag", hours: "10:00-19:00" },
-  { day: "Freitag", hours: "10:00-19:00" },
-  { day: "Samstag", hours: "09:00-16:00" },
-  { day: "Sonntag", hours: "geschlossen" },
-];
+export const openingHours = openingHoursDisplay;
 
 export const navigation = [
   { href: "#inhaber", label: "Inhaber" },
@@ -199,15 +200,4 @@ export const navigation = [
   { href: "#kontakt", label: "Kontakt" },
 ];
 
-export const socialLinks = [
-  {
-    label: "Instagram",
-    href: "https://www.instagram.com/",
-    platform: "instagram" as const,
-  },
-  {
-    label: "TikTok",
-    href: "https://www.tiktok.com/",
-    platform: "tiktok" as const,
-  },
-];
+export { socialLinks };

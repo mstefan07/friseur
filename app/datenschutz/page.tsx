@@ -8,6 +8,13 @@ export const metadata: Metadata = {
   title: "Datenschutz",
   description:
     "Datenschutz-Platzhalter für Yunes Barber in Langen. Muss vor Veröffentlichung rechtlich geprüft und ersetzt werden.",
+  alternates: {
+    canonical: "/datenschutz",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function DatenschutzPage() {

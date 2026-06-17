@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond, Inter } from "next/font/google";
+import { SeoJsonLd } from "@/components/SeoJsonLd";
+import { getSiteUrl, locale, ogImage, siteDescription, siteName } from "@/lib/site";
 import "./globals.css";
 
 const inter = Inter({
@@ -14,38 +16,44 @@ const cormorant = Cormorant_Garamond({
   display: "swap",
 });
 
+const siteUrl = getSiteUrl();
+const defaultTitle = "Yunes Barber | Herrenfriseur & Barber in Langen";
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.yunes-barber-langen.de"),
+  metadataBase: new URL(siteUrl),
   title: {
-    default: "Yunes Barber | Premium Herrenfriseur in Langen",
-    template: "%s | Yunes Barber Langen",
+    default: defaultTitle,
+    template: "%s | Yunes Barber",
   },
-  description:
-    "Premium Barber in Langen für Herrenhaarschnitt, Skin Fade, Bart trimmen, Rasur, Konturen und Styling mit Online-Terminbuchung.",
-  keywords: [
-    "Herrenfriseur Langen",
-    "Barber Langen",
-    "Skin Fade Langen",
-    "Bart trimmen Langen",
-    "Friseur Herren Langen",
-    "Yunes Barber",
-  ],
+  description: siteDescription,
+  alternates: {
+    canonical: "/",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
   openGraph: {
-    title: "Yunes Barber | Premium Barber Experience in Langen",
-    description:
-      "Präzise Schnitte, saubere Fades, Bartpflege und Online-Termine für moderne Herren in Langen.",
-    url: "https://example.com",
-    siteName: "Yunes Barber",
+    title: defaultTitle,
+    description: siteDescription,
+    url: siteUrl,
+    siteName,
     images: [
       {
-        url: "/images/hero-barber.png",
-        width: 1600,
-        height: 1000,
-        alt: "Premium Barber-Salon mit Herrenhaarschnitt in Langen",
+        url: ogImage.path,
+        width: ogImage.width,
+        height: ogImage.height,
+        alt: ogImage.alt,
       },
     ],
-    locale: "de_DE",
+    locale,
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: defaultTitle,
+    description: siteDescription,
+    images: [ogImage.path],
   },
 };
 
@@ -56,7 +64,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="de" className={`${inter.variable} ${cormorant.variable}`}>
-      <body>{children}</body>
+      <body>
+        <SeoJsonLd />
+        {children}
+      </body>
     </html>
   );
 }

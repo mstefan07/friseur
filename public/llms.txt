@@ -1,0 +1,14 @@
+# Yunes Barber
+
+> Moderner Herrenfriseur und Barber in Langen (Hessen).
+
+## Seiten
+- Startseite: /
+- Impressum: /impressum
+- Datenschutz: /datenschutz
+
+## Leistungen
+Herrenhaarschnitt, Skin Fade, Bart trimmen, Nassrasur, Hair & Beard Paket. Online-Terminbuchung auf der Startseite.
+
+## Kontakt
+Kontaktinformationen und Öffnungszeiten auf der Startseite (#kontakt) und im Impressum.
