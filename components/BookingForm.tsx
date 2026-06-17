@@ -19,7 +19,7 @@ const initialForm: BookingFormState = {
 };
 
 const fieldClass =
-  "box-border block w-full max-w-full min-w-0 border border-[#d3ae73]/25 bg-[#0f0e0c] px-3 py-3 text-[#f7f1e7] outline-none transition focus:border-[#d3ae73] focus:bg-[#151411] sm:px-4";
+  "box-border block h-14 w-full min-w-0 max-w-full appearance-none rounded-none border border-[#d3ae73]/25 bg-[#0f0e0c] px-4 pr-10 text-base text-[#f7f1e7] outline-none transition focus:border-[#d3ae73] focus:bg-[#151411] [color-scheme:dark] [&::-webkit-date-and-time-value]:min-w-0 [&::-webkit-date-and-time-value]:text-left [&::-webkit-calendar-picker-indicator]:cursor-pointer";
 
 function clientValidate(form: BookingFormState) {
   if (!form.date.trim() || !form.time.trim()) {
@@ -133,22 +133,24 @@ export function BookingForm() {
         >
           <div className="grid min-w-0 grid-cols-1 gap-4 md:grid-cols-2">
             <Field label="Datum">
-              <input
-                className={`${fieldClass} cursor-pointer [color-scheme:dark]`}
-                value={form.date}
-                name="date"
-                min={minDate}
-                onChange={(event) => updateField("date", event.target.value)}
-                onKeyDown={blockManualInput}
-                type="date"
-                required
-              />
+              <div className="relative box-border w-full min-w-0 max-w-full overflow-hidden">
+                <input
+                  className={`${fieldClass} cursor-pointer`}
+                  value={form.date}
+                  name="date"
+                  min={minDate}
+                  onChange={(event) => updateField("date", event.target.value)}
+                  onKeyDown={blockManualInput}
+                  type="date"
+                  required
+                />
+              </div>
             </Field>
 
             <Field label="Uhrzeit">
-              <div className="relative box-border w-full min-w-0 max-w-full">
+              <div className="relative box-border w-full min-w-0 max-w-full overflow-hidden">
                 <select
-                  className={`${fieldClass} cursor-pointer appearance-none pr-10 [color-scheme:dark]`}
+                  className={`${fieldClass} cursor-pointer`}
                   value={form.time}
                   name="time"
                   onChange={(event) => updateField("time", event.target.value)}
@@ -195,7 +197,7 @@ export function BookingForm() {
               whileTap={{ scale: 0.98 }}
               type="submit"
               disabled={status === "loading"}
-              className="box-border inline-flex w-full max-w-full min-w-0 items-center justify-center gap-2 bg-[#d3ae73] px-5 py-3.5 text-sm font-semibold text-[#12110f] transition hover:bg-[#f0d49e] disabled:cursor-not-allowed disabled:opacity-70"
+              className="box-border inline-flex h-14 w-full max-w-full min-w-0 items-center justify-center gap-2 bg-[#d3ae73] px-5 text-base font-semibold text-[#12110f] transition hover:bg-[#f0d49e] disabled:cursor-not-allowed disabled:opacity-70"
             >
               {status === "loading" ? (
                 "Wird gesendet..."
@@ -235,9 +237,9 @@ function Field({
   children: React.ReactNode;
 }) {
   return (
-    <label className="block w-full min-w-0 max-w-full box-border">
+    <div className="box-border w-full min-w-0 max-w-full">
       <span className="mb-1.5 block text-sm font-medium text-[#d3ae73]">{label}</span>
       {children}
-    </label>
+    </div>
   );
 }
