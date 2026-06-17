@@ -25,7 +25,7 @@ export function Navbar() {
           className="group flex items-center gap-2.5 sm:gap-3"
           aria-label="Zur Startseite"
         >
-          <BarberPoleIcon className="h-[32px] w-[16px] sm:h-[38px] sm:w-[19px]" />
+          <BarberPoleIcon className="h-[36px] w-[18px] sm:h-[42px] sm:w-[21px]" />
           <Image
             src="/images/barber-logo.webp"
             alt={`${salon.name} Logo`}

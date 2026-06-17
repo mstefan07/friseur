@@ -54,23 +54,23 @@ body {
   background: #ffffff;
 }
 
-@keyframes barber-pole-scroll {
+@keyframes barber-pole-rotate {
   from {
-    transform: translateY(0);
+    transform: rotate(0deg);
   }
   to {
-    transform: translateY(9px);
+    transform: rotate(360deg);
   }
 }
 
-.barber-pole-stripes {
+.barber-pole-spin {
   transform-box: fill-box;
   transform-origin: center;
-  animation: barber-pole-scroll 8s linear infinite;
+  animation: barber-pole-rotate 6s linear infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .barber-pole-stripes {
+  .barber-pole-spin {
     animation: none;
   }
 }
