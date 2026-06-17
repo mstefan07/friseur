@@ -5,7 +5,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { AnimatePresence, motion } from "motion/react";
 import { CalendarDays, Menu, X } from "lucide-react";
-import { navigation, salon } from "@/lib/data";
+import { navigation, salon, socialLinks } from "@/lib/data";
+import { SocialLinks } from "@/components/SocialLinks";
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -47,6 +48,7 @@ export function Navbar() {
         </div>
 
         <div className="hidden items-center gap-3 lg:flex">
+          <SocialLinks links={socialLinks} variant="dark" size="sm" />
           <motion.a
             whileHover={{ y: -2 }}
             whileTap={{ scale: 0.98 }}
@@ -89,6 +91,9 @@ export function Navbar() {
                   {item.label}
                 </a>
               ))}
+              <div className="mt-4">
+                <SocialLinks links={socialLinks} variant="dark" size="sm" />
+              </div>
               <a
                 href="#buchung"
                 onClick={() => setIsOpen(false)}
