@@ -22,7 +22,7 @@ const pillars = [
 
 export function Services() {
   return (
-    <SectionReveal id="salon" className="barber-gradient py-24 sm:py-32">
+    <SectionReveal id="salon" className="barber-gradient py-20 sm:py-24">
       <div className="mx-auto grid max-w-7xl gap-14 px-5 sm:px-8 lg:grid-cols-[0.92fr_1.08fr] lg:items-center">
         <div>
           <p className="mb-4 text-sm font-semibold text-[#d3ae73]">
@@ -32,16 +32,9 @@ export function Services() {
             Herrenpflege mit Ruhe, Handwerk und klarem Stil.
           </h2>
           <p className="mt-7 text-lg leading-8 text-[#cbbfac]">
-            Yunes Barber steht als Platzhalterkonzept für einen modernen
-            Herrenfriseur in Langen: präzise Schnitte, saubere Fades, gepflegte
-            Baerte und Beratung ohne Hektik. Jeder Termin soll sich kontrolliert,
+            Yunes Barber steht für präzise Schnitte, saubere Fades, gepflegte
+            Bärte und Beratung ohne Hektik. Jeder Termin soll sich kontrolliert,
             hochwertig und persönlich anfühlen.
-          </p>
-          <p className="mt-5 text-base leading-8 text-[#aFA493]">
-            Die Texte und Bilder sind bewusst austauschbar angelegt. Echte
-            Teamfotos, Salonbilder und Marken können später direkt in den
-            Daten und im Ordner <span className="text-[#d3ae73]">public/images</span>{" "}
-            ersetzt werden.
           </p>
 
           <div className="mt-10 grid gap-4 sm:grid-cols-3">

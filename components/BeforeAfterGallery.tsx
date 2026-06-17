@@ -7,22 +7,21 @@ import { SectionReveal } from "@/components/SectionReveal";
 
 export function BeforeAfterGallery() {
   return (
-    <SectionReveal id="transformationen" className="barber-gradient py-24 sm:py-32">
+    <SectionReveal id="transformationen" className="barber-gradient pt-10 pb-16 sm:pt-12 sm:pb-20">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <div className="max-w-3xl">
           <p className="mb-4 text-sm font-semibold text-[#d3ae73]">
             Vorher / Nachher
           </p>
-          <h2 className="font-display text-4xl leading-tight text-[#f7f1e7] sm:text-6xl">
+          <h2 className="font-display text-3xl leading-tight text-[#f7f1e7] sm:text-5xl">
             Transformationen für Fade, Bart und Styling.
           </h2>
-          <p className="mt-6 text-lg leading-8 text-[#cbbfac]">
-            Interaktive Platzhalter, die später durch echte Kundenbilder
-            ersetzt werden können. Ziehe den Griff nach links oder rechts.
+          <p className="mt-4 text-base leading-7 text-[#cbbfac] sm:text-lg">
+            Ziehe den Griff nach links oder rechts, um den Unterschied zu sehen.
           </p>
         </div>
 
-        <div className="mt-14 grid gap-6 lg:grid-cols-3">
+        <div className="mt-8 grid gap-5 lg:grid-cols-3">
           {beforeAfterItems.map((item, index) => (
             <motion.article
               key={item.title}

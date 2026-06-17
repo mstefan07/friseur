@@ -17,8 +17,8 @@ export default function Home() {
         <Hero />
         <OwnerSection />
         <Services />
-        <PriceList />
         <BeforeAfterGallery />
+        <PriceList />
         <Gallery />
         <BookingForm />
         <ContactSection />

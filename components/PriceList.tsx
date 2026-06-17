@@ -21,76 +21,70 @@ export function PriceList() {
   const categories = Object.keys(categoryLabels) as BarberService["category"][];
 
   return (
-    <SectionReveal id="leistungen" className="cream-section py-24 sm:py-32">
+    <SectionReveal id="leistungen" className="barber-gradient py-14 sm:py-18">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
-        <div className="max-w-3xl">
-          <p className="mb-4 text-sm font-semibold text-[#8a6234]">
+        <div className="max-w-2xl">
+          <p className="mb-3 text-sm font-semibold text-[#d3ae73]">
             Leistungen & Preise
           </p>
-          <h2 className="font-display text-4xl leading-tight text-[#171511] sm:text-6xl">
-            Barber-Services für Schnitt, Fade, Bart und Finish.
+          <h2 className="font-display text-3xl leading-tight text-[#f7f1e7] sm:text-4xl">
+            Schnitt, Fade, Bart und Finish.
           </h2>
-          <p className="mt-6 text-lg leading-8 text-[#5b5147]">
-            Platzhalterpreise als Orientierung. Echte Preise, Dauer und
-            Leistungsbeschreibungen können später zentral in{" "}
-            <span className="font-semibold text-[#171511]">lib/data.ts</span>{" "}
-            ersetzt werden.
+          <p className="mt-4 text-sm leading-7 text-[#b9ad9d] sm:text-base">
+            Kompakte Übersicht der Barber-Services — Preise als Orientierung,
+            Buchung direkt im Anschluss möglich.
           </p>
         </div>
 
-        <div className="mt-14 grid gap-8">
+        <div className="mt-8 space-y-7">
           {categories.map((category) => {
             const services = barberServices.filter((service) => service.category === category);
 
             return (
               <div key={category}>
-                <div className="mb-5 flex items-center gap-3">
-                  <Scissors className="size-5 text-[#8a6234]" aria-hidden="true" />
-                  <h3 className="text-xl font-semibold text-[#171511]">
+                <div className="mb-3 flex items-center gap-2 border-b border-[#d3ae73]/18 pb-2">
+                  <Scissors className="size-4 text-[#d3ae73]" aria-hidden="true" />
+                  <h3 className="text-sm font-semibold uppercase tracking-[0.14em] text-[#e7dccb]">
                     {categoryLabels[category]}
                   </h3>
                 </div>
-                <div className="grid gap-4 md:grid-cols-2">
+                <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
                   {services.map((service, index) => (
                     <motion.article
                       key={service.id}
-                      initial={{ opacity: 0, y: 18 }}
+                      initial={{ opacity: 0, y: 12 }}
                       whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true, margin: "-70px" }}
+                      viewport={{ once: true, margin: "-60px" }}
                       transition={{
-                        duration: 0.55,
-                        delay: index * 0.04,
+                        duration: 0.45,
+                        delay: index * 0.03,
                         ease: [0.22, 1, 0.36, 1],
                       }}
-                      whileHover={{ y: -4 }}
-                      className="group border border-[#171511]/12 bg-white/58 p-5 shadow-[0_18px_48px_rgba(23,21,17,0.08)] backdrop-blur transition hover:border-[#8a6234]/45"
+                      className="group flex h-full flex-col border border-white/10 bg-[#12110f]/88 p-4 transition hover:border-[#d3ae73]/40 hover:bg-[#171512]"
                     >
-                      <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
-                        <div>
-                          <h4 className="text-xl font-semibold text-[#171511]">
-                            {service.name}
-                          </h4>
-                          <p className="mt-3 max-w-xl text-sm leading-6 text-[#5b5147]">
-                            {service.description}
-                          </p>
-                        </div>
-                        <span className="shrink-0 text-lg font-semibold text-[#8a6234]">
+                      <div className="flex items-start justify-between gap-3">
+                        <h4 className="text-base font-semibold leading-snug text-[#f7f1e7]">
+                          {service.name}
+                        </h4>
+                        <span className="shrink-0 text-sm font-semibold text-[#d3ae73]">
                           {service.price}
                         </span>
                       </div>
-
-                      <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                        <span className="inline-flex items-center gap-2 text-sm text-[#6d6257]">
-                          <Clock className="size-4" aria-hidden="true" />
+                      <p className="mt-2 line-clamp-2 text-xs leading-5 text-[#aFA493]">
+                        {service.description}
+                      </p>
+                      <div className="mt-auto flex items-center justify-between gap-2 border-t border-white/8 pt-3">
+                        <span className="inline-flex items-center gap-1.5 text-xs text-[#b9ad9d]">
+                          <Clock className="size-3.5" aria-hidden="true" />
                           ca. {service.durationMinutes} Min.
                         </span>
                         <button
                           type="button"
                           onClick={() => selectService(service.id)}
-                          className="inline-flex items-center justify-center gap-2 border border-[#171511]/18 bg-[#171511] px-4 py-3 text-sm font-semibold text-[#f3ead9] transition group-hover:bg-[#8a6234]"
+                          className="inline-flex items-center gap-1.5 border border-[#d3ae73]/35 bg-[#d3ae73]/10 px-2.5 py-1.5 text-xs font-semibold text-[#f3ead9] transition hover:border-[#d3ae73] hover:bg-[#d3ae73]/20"
                         >
-                          <CalendarPlus className="size-4" aria-hidden="true" />
-                          Diese Leistung buchen
+                          <CalendarPlus className="size-3.5" aria-hidden="true" />
+                          Buchen
                         </button>
                       </div>
                     </motion.article>
