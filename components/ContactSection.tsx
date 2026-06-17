@@ -6,9 +6,8 @@ import {
   Route,
   type LucideIcon,
 } from "lucide-react";
-import { openingHours, salon, socialLinks } from "@/lib/data";
+import { openingHours, salon } from "@/lib/data";
 import { SectionReveal } from "@/components/SectionReveal";
-import { SocialLinks } from "@/components/SocialLinks";
 
 export function ContactSection() {
   return (
@@ -56,11 +55,6 @@ export function ContactSection() {
               <Route className="size-4" aria-hidden="true" />
               Route
             </a>
-          </div>
-
-          <div className="mt-9">
-            <p className="mb-3 text-sm font-semibold text-[#8a6234]">Social Media</p>
-            <SocialLinks links={socialLinks} variant="light" />
           </div>
         </div>
 
