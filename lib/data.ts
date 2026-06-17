@@ -27,12 +27,6 @@ export const salon = {
     "https://calendar.google.com/calendar/appointments/schedules/AcZssZ1thEBHs9A3FH2l9DMWVBjaem45Viie2xHCbddoiAJRvTbJKIRfgPf7nJjXF76n4nsZ_65jJHbb?gv=true",
 };
 
-export const trustItems = [
-  "Premium Barber",
-  "Moderne Fades",
-  "Bart & Rasur",
-  "Online buchbar",
-];
 
 export const barbers: Barber[] = [
   { id: "yunes", name: "Yunes", role: "Master Barber" },
@@ -202,7 +196,6 @@ export const navigation = [
   { href: "#salon", label: "Salon" },
   { href: "#leistungen", label: "Leistungen" },
   { href: "#transformationen", label: "Vorher/Nachher" },
-  { href: "#buchung", label: "Termin" },
   { href: "#kontakt", label: "Kontakt" },
 ];
 

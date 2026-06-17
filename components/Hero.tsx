@@ -2,8 +2,7 @@
 
 import Image from "next/image";
 import { motion, useReducedMotion } from "motion/react";
-import { ArrowRight, CalendarDays, Star } from "lucide-react";
-import { salon, trustItems } from "@/lib/data";
+import { ArrowRight, CalendarDays } from "lucide-react";
 
 export function Hero() {
   const prefersReducedMotion = useReducedMotion();
@@ -35,10 +34,6 @@ export function Hero() {
           transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
           className="max-w-3xl"
         >
-          <div className="mb-6 inline-flex items-center gap-3 border border-[#d3ae73]/35 bg-black/24 px-4 py-2 text-sm text-[#d3ae73] backdrop-blur">
-            <Star className="size-4 fill-[#d3ae73]" aria-hidden="true" />
-            {salon.name} · Herrenfriseur in {salon.city}
-          </div>
           <h1 className="font-display text-5xl leading-[0.98] text-[#f7f1e7] sm:text-7xl lg:text-8xl">
             Premium Barber Experience in Langen
           </h1>
@@ -66,24 +61,6 @@ export function Hero() {
               Leistungen ansehen
               <ArrowRight className="size-5" aria-hidden="true" />
             </motion.a>
-          </div>
-
-          <div className="mt-11 grid max-w-2xl grid-cols-2 gap-3 sm:grid-cols-4">
-            {trustItems.map((item, index) => (
-              <motion.div
-                key={item}
-                initial={prefersReducedMotion ? false : { opacity: 0, y: 16 }}
-                animate={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
-                transition={{
-                  duration: 0.55,
-                  delay: 0.35 + index * 0.08,
-                  ease: [0.22, 1, 0.36, 1],
-                }}
-                className="border border-white/12 bg-black/22 px-4 py-3 text-sm text-[#e7dccb] backdrop-blur"
-              >
-                {item}
-              </motion.div>
-            ))}
           </div>
         </motion.div>
       </div>

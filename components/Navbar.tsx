@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import { AnimatePresence, motion } from "motion/react";
 import { CalendarDays, Menu, X } from "lucide-react";
 import { navigation, salon, socialLinks } from "@/lib/data";
@@ -14,8 +13,16 @@ export function Navbar() {
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-[#090907]/82 backdrop-blur-xl">
       <nav className="mx-auto flex h-18 max-w-7xl items-center justify-between px-5 sm:px-8">
-        <Link
+        <a
           href="/"
+          onClick={(event) => {
+            event.preventDefault();
+            if (window.location.pathname === "/") {
+              window.location.reload();
+              return;
+            }
+            window.location.href = "/";
+          }}
           className="group flex items-center gap-3"
           aria-label="Zur Startseite"
         >
@@ -33,7 +40,7 @@ export function Navbar() {
             </span>
             <span className="block text-xs text-[#b9ad9d]">Langen</span>
           </span>
-        </Link>
+        </a>
 
         <div className="hidden items-center gap-7 lg:flex">
           {navigation.map((item) => (
