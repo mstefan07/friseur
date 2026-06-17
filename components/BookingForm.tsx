@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { CalendarDays } from "lucide-react";
+import { CalendarDays, ChevronDown } from "lucide-react";
+import { getAvailableTimeSlots } from "@/lib/booking";
 import { SectionReveal } from "@/components/SectionReveal";
 
 type BookingFormState = {
@@ -17,7 +18,7 @@ const initialForm: BookingFormState = {
   time: "",
 };
 
-const inputClass =
+const fieldClass =
   "w-full border border-[#d3ae73]/25 bg-[#0f0e0c] px-4 py-3 text-[#f7f1e7] outline-none transition focus:border-[#d3ae73] focus:bg-[#151411]";
 
 function clientValidate(form: BookingFormState) {
@@ -28,18 +29,41 @@ function clientValidate(form: BookingFormState) {
   return {};
 }
 
+function blockManualInput(event: React.KeyboardEvent<HTMLInputElement>) {
+  if (event.key !== "Tab" && event.key !== "Shift") {
+    event.preventDefault();
+  }
+}
+
 export function BookingForm() {
   const [form, setForm] = useState<BookingFormState>(initialForm);
   const [errors, setErrors] = useState<{ form?: string }>({});
   const [status, setStatus] = useState<FormStatus>("idle");
   const [minDate, setMinDate] = useState("");
 
+  const availableTimeSlots = useMemo(
+    () => getAvailableTimeSlots(form.date),
+    [form.date],
+  );
+
   useEffect(() => {
     setMinDate(new Date().toISOString().slice(0, 10));
   }, []);
 
+  useEffect(() => {
+    if (form.time && !availableTimeSlots.includes(form.time)) {
+      setForm((current) => ({ ...current, time: "" }));
+    }
+  }, [availableTimeSlots, form.time]);
+
   function updateField(field: keyof BookingFormState, value: string) {
-    setForm((current) => ({ ...current, [field]: value }));
+    setForm((current) => {
+      const next = { ...current, [field]: value };
+      if (field === "date") {
+        next.time = "";
+      }
+      return next;
+    });
     setErrors({});
     if (status !== "idle") setStatus("idle");
   }
@@ -110,24 +134,45 @@ export function BookingForm() {
           <div className="grid gap-4 sm:grid-cols-2">
             <Field label="Datum">
               <input
-                className={inputClass}
+                className={`${fieldClass} cursor-pointer [color-scheme:dark]`}
                 value={form.date}
                 name="date"
                 min={minDate}
                 onChange={(event) => updateField("date", event.target.value)}
+                onKeyDown={blockManualInput}
                 type="date"
+                required
               />
             </Field>
 
             <Field label="Uhrzeit">
-              <input
-                className={inputClass}
-                value={form.time}
-                name="time"
-                onChange={(event) => updateField("time", event.target.value)}
-                type="time"
-                step="900"
-              />
+              <div className="relative">
+                <select
+                  className={`${fieldClass} cursor-pointer appearance-none pr-10 [color-scheme:dark]`}
+                  value={form.time}
+                  name="time"
+                  onChange={(event) => updateField("time", event.target.value)}
+                  disabled={!form.date || availableTimeSlots.length === 0}
+                  required
+                >
+                  <option value="">
+                    {!form.date
+                      ? "Zuerst Datum wählen"
+                      : availableTimeSlots.length === 0
+                        ? "An diesem Tag geschlossen"
+                        : "Uhrzeit wählen"}
+                  </option>
+                  {availableTimeSlots.map((slot) => (
+                    <option key={slot} value={slot}>
+                      {slot} Uhr
+                    </option>
+                  ))}
+                </select>
+                <ChevronDown
+                  className="pointer-events-none absolute top-1/2 right-3 size-4 -translate-y-1/2 text-[#d3ae73]"
+                  aria-hidden="true"
+                />
+              </div>
             </Field>
           </div>
 

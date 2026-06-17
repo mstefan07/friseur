@@ -1,3 +1,5 @@
+import { openingHours } from "@/lib/data";
+
 export type BookingPayload = {
   date: string;
   time: string;
@@ -9,6 +11,72 @@ export type BookingValidationResult =
 
 const timePattern = /^([01]\d|2[0-3]):[0-5]\d$/;
 const DEFAULT_DURATION_MINUTES = 45;
+const SLOT_INTERVAL_MINUTES = 30;
+const FALLBACK_OPEN = "09:00";
+const FALLBACK_CLOSE = "18:00";
+
+const weekdayNames = [
+  "Sonntag",
+  "Montag",
+  "Dienstag",
+  "Mittwoch",
+  "Donnerstag",
+  "Freitag",
+  "Samstag",
+] as const;
+
+function parseTimeToMinutes(time: string) {
+  const [hours, minutes] = time.split(":").map(Number);
+  return hours * 60 + minutes;
+}
+
+function formatMinutes(totalMinutes: number) {
+  const hours = Math.floor(totalMinutes / 60);
+  const minutes = totalMinutes % 60;
+  return `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}`;
+}
+
+function generateTimeSlots(start: string, end: string, intervalMinutes = SLOT_INTERVAL_MINUTES) {
+  const startMinutes = parseTimeToMinutes(start);
+  const endMinutes = parseTimeToMinutes(end);
+  const slots: string[] = [];
+
+  for (let minutes = startMinutes; minutes <= endMinutes; minutes += intervalMinutes) {
+    slots.push(formatMinutes(minutes));
+  }
+
+  return slots;
+}
+
+function getOpeningHoursForDate(date: string) {
+  const weekday = weekdayNames[new Date(`${date}T12:00:00`).getDay()];
+  return openingHours.find((entry) => entry.day === weekday);
+}
+
+export function getAvailableTimeSlots(date: string, today = new Date()) {
+  const fallbackSlots = generateTimeSlots(FALLBACK_OPEN, FALLBACK_CLOSE);
+
+  if (!date) {
+    return fallbackSlots;
+  }
+
+  const hoursForDay = getOpeningHoursForDate(date);
+
+  if (!hoursForDay || hoursForDay.hours === "geschlossen") {
+    return [];
+  }
+
+  const [open, close] = hoursForDay.hours.split("-").map((value) => value.trim());
+  const slots = generateTimeSlots(open || FALLBACK_OPEN, close || FALLBACK_CLOSE);
+
+  const todayKey = today.toISOString().slice(0, 10);
+  if (date !== todayKey) {
+    return slots;
+  }
+
+  const nowMinutes = today.getHours() * 60 + today.getMinutes();
+  return slots.filter((slot) => parseTimeToMinutes(slot) > nowMinutes);
+}
 
 export function validateBookingPayload(input: unknown): BookingValidationResult {
   const errors: Record<string, string> = {};
