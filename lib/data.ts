@@ -23,6 +23,8 @@ export const salon = {
   email: "termin@yunes-barber.de",
   address: "Platzhalterstraße 12, 63225 Langen",
   mapsUrl: "https://www.google.com/maps/search/?api=1&query=Langen",
+  googleCalendarSchedulingUrl:
+    "https://calendar.google.com/calendar/appointments/schedules/AcZssZ1thEBHs9A3FH2l9DMWVBjaem45Viie2xHCbddoiAJRvTbJKIRfgPf7nJjXF76n4nsZ_65jJHbb?gv=true",
 };
 
 export const trustItems = [
