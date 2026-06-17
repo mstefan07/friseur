@@ -1,9 +1,10 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { AnimatePresence, motion } from "motion/react";
-import { CalendarDays, Menu, Scissors, X } from "lucide-react";
+import { CalendarDays, Menu, X } from "lucide-react";
 import { navigation, salon } from "@/lib/data";
 
 export function Navbar() {
@@ -17,9 +18,14 @@ export function Navbar() {
           className="group flex items-center gap-3"
           aria-label="Zur Startseite"
         >
-          <span className="flex size-10 items-center justify-center border border-[#d3ae73]/40 bg-[#151411] text-[#d3ae73] transition group-hover:border-[#d3ae73]">
-            <Scissors className="size-5" aria-hidden="true" />
-          </span>
+          <Image
+            src="/images/barber-logo.webp"
+            alt={`${salon.name} Logo`}
+            width={1360}
+            height={907}
+            priority
+            className="h-10 w-auto max-w-[120px] object-contain sm:h-12 sm:max-w-[150px] lg:max-w-[170px]"
+          />
           <span>
             <span className="block font-display text-2xl leading-none text-[#f7f1e7]">
               {salon.name}

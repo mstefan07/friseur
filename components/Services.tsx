@@ -67,8 +67,8 @@ export function Services() {
         <div className="grid gap-5 sm:grid-cols-5">
           <div className="relative min-h-[420px] overflow-hidden border border-white/10 sm:col-span-3">
             <Image
-              src="/images/gallery-station.png"
-              alt="Premium Barber Station als Platzhalterbild"
+              src="/images/barber-salon.webp"
+              alt="Barber-Salon von Yunes Barber in Langen"
               fill
               sizes="(min-width: 1024px) 46vw, 100vw"
               className="object-cover transition duration-700 hover:scale-[1.025]"
