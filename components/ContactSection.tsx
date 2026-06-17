@@ -1,22 +1,14 @@
 import {
-  Camera,
   ExternalLink,
   Mail,
   MapPin,
-  MessageCircle,
-  Music2,
   Phone,
   Route,
   type LucideIcon,
 } from "lucide-react";
-import { openingHours, salon } from "@/lib/data";
+import { openingHours, salon, socialLinks } from "@/lib/data";
 import { SectionReveal } from "@/components/SectionReveal";
-
-const socials = [
-  { label: "Instagram", href: "https://www.instagram.com/", icon: Camera },
-  { label: "TikTok", href: "https://www.tiktok.com/", icon: Music2 },
-  { label: "Facebook", href: "https://www.facebook.com/", icon: MessageCircle },
-];
+import { SocialLinks } from "@/components/SocialLinks";
 
 export function ContactSection() {
   return (
@@ -66,23 +58,9 @@ export function ContactSection() {
             </a>
           </div>
 
-          <div className="mt-9 flex gap-3">
-            {socials.map((social) => {
-              const Icon = social.icon;
-
-              return (
-                <a
-                  key={social.label}
-                  href={social.href}
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label={social.label}
-                  className="flex size-11 items-center justify-center border border-[#171511]/14 text-[#171511] transition hover:border-[#8a6234] hover:bg-[#8a6234] hover:text-[#f3ead9]"
-                >
-                  <Icon className="size-5" aria-hidden="true" />
-                </a>
-              );
-            })}
+          <div className="mt-9">
+            <p className="mb-3 text-sm font-semibold text-[#8a6234]">Social Media</p>
+            <SocialLinks links={socialLinks} variant="light" />
           </div>
         </div>
 

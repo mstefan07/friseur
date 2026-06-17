@@ -1,24 +1,30 @@
 "use client";
 
-import { motion } from "motion/react";
-import { CalendarPlus, Clock, Scissors } from "lucide-react";
+import { useState } from "react";
+import { AnimatePresence, motion } from "motion/react";
+import { CalendarPlus, ChevronDown, Clock } from "lucide-react";
 import { barberServices, type BarberService } from "@/lib/data";
 import { SectionReveal } from "@/components/SectionReveal";
 
 const categoryLabels: Record<BarberService["category"], string> = {
-  Cut: "Schnitt",
+  Cut: "Haarschnitte",
   Beard: "Bart & Rasur",
   Package: "Pakete",
-  Finish: "Details & Pflege",
+  Finish: "Styling & Pflege",
 };
 
-function selectService(serviceId: string) {
-  window.dispatchEvent(new CustomEvent("barber:select-service", { detail: serviceId }));
+const categories = Object.keys(categoryLabels) as BarberService["category"][];
+
+function scrollToBooking() {
   document.getElementById("buchung")?.scrollIntoView({ behavior: "smooth" });
 }
 
 export function PriceList() {
-  const categories = Object.keys(categoryLabels) as BarberService["category"][];
+  const [openCategory, setOpenCategory] = useState<BarberService["category"] | null>("Cut");
+
+  function toggleCategory(category: BarberService["category"]) {
+    setOpenCategory((current) => (current === category ? null : category));
+  }
 
   return (
     <SectionReveal id="leistungen" className="barber-gradient py-14 sm:py-18">
@@ -36,60 +42,80 @@ export function PriceList() {
           </p>
         </div>
 
-        <div className="mt-8 space-y-7">
+        <div className="mt-8 space-y-3">
           {categories.map((category) => {
             const services = barberServices.filter((service) => service.category === category);
+            const isOpen = openCategory === category;
 
             return (
-              <div key={category}>
-                <div className="mb-3 flex items-center gap-2 border-b border-[#d3ae73]/18 pb-2">
-                  <Scissors className="size-4 text-[#d3ae73]" aria-hidden="true" />
-                  <h3 className="text-sm font-semibold uppercase tracking-[0.14em] text-[#e7dccb]">
+              <div
+                key={category}
+                className="overflow-hidden border border-white/10 bg-[#12110f]/88"
+              >
+                <button
+                  type="button"
+                  onClick={() => toggleCategory(category)}
+                  aria-expanded={isOpen}
+                  className="flex w-full items-center justify-between gap-4 px-4 py-4 text-left transition hover:bg-white/[0.03] sm:px-5"
+                >
+                  <span className="text-sm font-semibold uppercase tracking-[0.14em] text-[#f7f1e7] sm:text-base">
                     {categoryLabels[category]}
-                  </h3>
-                </div>
-                <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-                  {services.map((service, index) => (
-                    <motion.article
-                      key={service.id}
-                      initial={{ opacity: 0, y: 12 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true, margin: "-60px" }}
-                      transition={{
-                        duration: 0.45,
-                        delay: index * 0.03,
-                        ease: [0.22, 1, 0.36, 1],
-                      }}
-                      className="group flex h-full flex-col border border-white/10 bg-[#12110f]/88 p-4 transition hover:border-[#d3ae73]/40 hover:bg-[#171512]"
+                  </span>
+                  <span className="inline-flex items-center gap-2 text-xs text-[#d3ae73] sm:text-sm">
+                    {services.length} Leistungen
+                    <ChevronDown
+                      className={`size-4 transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
+                      aria-hidden="true"
+                    />
+                  </span>
+                </button>
+
+                <AnimatePresence initial={false}>
+                  {isOpen ? (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
+                      className="overflow-hidden"
                     >
-                      <div className="flex items-start justify-between gap-3">
-                        <h4 className="text-base font-semibold leading-snug text-[#f7f1e7]">
-                          {service.name}
-                        </h4>
-                        <span className="shrink-0 text-sm font-semibold text-[#d3ae73]">
-                          {service.price}
-                        </span>
+                      <div className="space-y-3 border-t border-white/10 px-4 py-4 sm:px-5">
+                        {services.map((service) => (
+                          <article
+                            key={service.id}
+                            className="flex flex-col gap-3 border border-white/10 bg-[#0f0e0c]/90 p-4 sm:flex-row sm:items-center sm:justify-between"
+                          >
+                            <div className="min-w-0 flex-1">
+                              <div className="flex flex-wrap items-start justify-between gap-3">
+                                <h4 className="text-base font-semibold text-[#f7f1e7]">
+                                  {service.name}
+                                </h4>
+                                <span className="shrink-0 text-sm font-semibold text-[#d3ae73]">
+                                  {service.price}
+                                </span>
+                              </div>
+                              <p className="mt-2 text-sm leading-6 text-[#b9ad9d]">
+                                {service.description}
+                              </p>
+                              <span className="mt-3 inline-flex items-center gap-1.5 text-xs text-[#aFA493]">
+                                <Clock className="size-3.5" aria-hidden="true" />
+                                ca. {service.durationMinutes} Min.
+                              </span>
+                            </div>
+                            <button
+                              type="button"
+                              onClick={scrollToBooking}
+                              className="inline-flex shrink-0 items-center justify-center gap-2 border border-[#d3ae73]/40 bg-[#d3ae73] px-4 py-2.5 text-sm font-semibold text-[#12110f] transition hover:bg-[#f0d49e]"
+                            >
+                              <CalendarPlus className="size-4" aria-hidden="true" />
+                              Termin buchen
+                            </button>
+                          </article>
+                        ))}
                       </div>
-                      <p className="mt-2 line-clamp-2 text-xs leading-5 text-[#aFA493]">
-                        {service.description}
-                      </p>
-                      <div className="mt-auto flex items-center justify-between gap-2 border-t border-white/8 pt-3">
-                        <span className="inline-flex items-center gap-1.5 text-xs text-[#b9ad9d]">
-                          <Clock className="size-3.5" aria-hidden="true" />
-                          ca. {service.durationMinutes} Min.
-                        </span>
-                        <button
-                          type="button"
-                          onClick={() => selectService(service.id)}
-                          className="inline-flex items-center gap-1.5 border border-[#d3ae73]/35 bg-[#d3ae73]/10 px-2.5 py-1.5 text-xs font-semibold text-[#f3ead9] transition hover:border-[#d3ae73] hover:bg-[#d3ae73]/20"
-                        >
-                          <CalendarPlus className="size-3.5" aria-hidden="true" />
-                          Buchen
-                        </button>
-                      </div>
-                    </motion.article>
-                  ))}
-                </div>
+                    </motion.div>
+                  ) : null}
+                </AnimatePresence>
               </div>
             );
           })}

@@ -202,7 +202,19 @@ export const navigation = [
   { href: "#salon", label: "Salon" },
   { href: "#leistungen", label: "Leistungen" },
   { href: "#transformationen", label: "Vorher/Nachher" },
-  { href: "#galerie", label: "Galerie" },
   { href: "#buchung", label: "Termin" },
   { href: "#kontakt", label: "Kontakt" },
+];
+
+export const socialLinks = [
+  {
+    label: "Instagram",
+    href: "https://www.instagram.com/",
+    platform: "instagram" as const,
+  },
+  {
+    label: "TikTok",
+    href: "https://www.tiktok.com/",
+    platform: "tiktok" as const,
+  },
 ];

@@ -2,7 +2,6 @@ import { BeforeAfterGallery } from "@/components/BeforeAfterGallery";
 import { BookingForm } from "@/components/BookingForm";
 import { ContactSection } from "@/components/ContactSection";
 import { Footer } from "@/components/Footer";
-import { Gallery } from "@/components/Gallery";
 import { Hero } from "@/components/Hero";
 import { Navbar } from "@/components/Navbar";
 import { OwnerSection } from "@/components/OwnerSection";
@@ -19,7 +18,6 @@ export default function Home() {
         <Services />
         <BeforeAfterGallery />
         <PriceList />
-        <Gallery />
         <BookingForm />
         <ContactSection />
       </main>
