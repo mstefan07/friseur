@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { motion, useReducedMotion } from "motion/react";
-import { CalendarDays, Scissors } from "lucide-react";
+import { CalendarDays } from "lucide-react";
 import { salon } from "@/lib/data";
 
 const OWNER_IMAGE = {
@@ -60,8 +60,15 @@ export function OwnerSection() {
                 </p>
                 <p className="mt-1 font-display text-2xl text-[#f7f1e7]">Yunes</p>
               </div>
-              <span className="inline-flex size-11 items-center justify-center border border-[#d3ae73]/40 bg-[#151411]/88 text-[#d3ae73] backdrop-blur">
-                <Scissors className="size-5" aria-hidden="true" />
+              <span className="inline-flex size-11 shrink-0 items-center justify-center border border-[#d3ae73]/40 bg-[#151411]/88 p-1.5 backdrop-blur">
+                <Image
+                  src="/images/barber-logo.webp"
+                  alt=""
+                  width={1360}
+                  height={907}
+                  aria-hidden="true"
+                  className="h-full w-full object-contain"
+                />
               </span>
             </div>
           </div>
