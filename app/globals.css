@@ -53,3 +53,24 @@ body {
   color-scheme: light;
   background: #ffffff;
 }
+
+@keyframes barber-pole-scroll {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(9px);
+  }
+}
+
+.barber-pole-stripes {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: barber-pole-scroll 8s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .barber-pole-stripes {
+    animation: none;
+  }
+}
